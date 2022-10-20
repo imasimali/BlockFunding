@@ -33,6 +33,14 @@ import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { FaHandshake } from "react-icons/fa";
 import { FcShare, FcDonate, FcMoneyTransfer } from "react-icons/fc";
 
+import firebase from "firebase";
+import withFirebaseAuth from "react-with-firebase-auth";
+import firebaseConfig from "../firebaseConfig";
+
+const firebaseApp = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
+
 export async function getServerSideProps(context) {
   const campaigns = await factory.methods.getDeployedCampaigns().call();
 
@@ -198,9 +206,11 @@ function CampaignCard({
   );
 }
 
-export default function Home({ campaigns }) {
+const Home = ({ campaigns, user }) => {
   const [campaignList, setCampaignList] = useState([]);
   const [ethPrice, updateEthPrice] = useState(null);
+
+  console.log(user);
 
   async function getSummary() {
     try {
@@ -344,4 +354,8 @@ export default function Home({ campaigns }) {
       </main>
     </div>
   );
-}
+};
+
+const firebaseAppAuth = firebaseApp.auth();
+
+export default withFirebaseAuth({ firebaseAppAuth })(Home);

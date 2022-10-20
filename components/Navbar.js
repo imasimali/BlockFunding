@@ -17,11 +17,21 @@ import {
 import { useWallet } from "use-wallet";
 
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import DarkModeSwitch from "./DarkModeSwitch";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
-export default function NavBar() {
+import firebase from "firebase";
+import withFirebaseAuth from "react-with-firebase-auth";
+import firebaseConfig from "../firebaseConfig";
+
+const firebaseApp = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
+
+const NavBar = ({ user, signOut }) => {
   const wallet = useWallet();
+  const router = useRouter();
 
   return (
     <Box>
@@ -100,19 +110,41 @@ export default function NavBar() {
             >
               <NextLink href="/#howitworks"> How it Works</NextLink>
             </Button>
-
-            {wallet.status === "connected" ? (
-              <Menu>
-                <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                  {wallet.account.substr(0, 10) + "..."}
-                </MenuButton>
-                <MenuList>
-                  <MenuItem onClick={() => wallet.reset()}>
-                    {" "}
-                    Disconnect Wallet{" "}
-                  </MenuItem>
-                </MenuList>
-              </Menu>
+            {user ? (
+              wallet.status === "connected" ? (
+                <Menu>
+                  <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                    {wallet.account.substr(0, 10) + "..."}
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem onClick={() => wallet.reset()}>
+                      {" "}
+                      Disconnect Wallet{" "}
+                    </MenuItem>
+                    <MenuItem onClick={() => signOut()}>
+                      {" "}
+                      Logout Account{" "}
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              ) : (
+                <div>
+                  <Button
+                    display={{ base: "none", md: "inline-flex" }}
+                    fontSize={"md"}
+                    fontWeight={600}
+                    color={"white"}
+                    bg={"teal.400"}
+                    href={"#"}
+                    _hover={{
+                      bg: "teal.300",
+                    }}
+                    onClick={() => wallet.connect()}
+                  >
+                    Connect Wallet{" "}
+                  </Button>
+                </div>
+              )
             ) : (
               <div>
                 <Button
@@ -125,9 +157,9 @@ export default function NavBar() {
                   _hover={{
                     bg: "teal.300",
                   }}
-                  onClick={() => wallet.connect()}
+                  onClick={() => router.push("/auth/login")}
                 >
-                  Connect Wallet{" "}
+                  Login Account{" "}
                 </Button>
               </div>
             )}
@@ -142,4 +174,8 @@ export default function NavBar() {
       </Flex>
     </Box>
   );
-}
+};
+
+const firebaseAppAuth = firebaseApp.auth();
+
+export default withFirebaseAuth({ firebaseAppAuth })(NavBar);
