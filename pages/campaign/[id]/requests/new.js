@@ -4,7 +4,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useWallet } from "use-wallet";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getETHPrice, getETHPriceInUSD } from "../../../../lib/getETHPrice";
 import {
   Box,
@@ -29,7 +29,15 @@ import web3 from "../../../../smart-contract/web3";
 import Campaign from "../../../../smart-contract/campaign";
 import { useAsync } from "react-use";
 
-export default function NewRequest() {
+import firebase from "firebase";
+import withFirebaseAuth from "react-with-firebase-auth";
+import firebaseConfig from "../../../../firebaseConfig";
+
+const firebaseApp = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
+
+const NewRequest = ({ user }) => {
   const router = useRouter();
   const { id } = router.query;
   const {
@@ -43,6 +51,21 @@ export default function NewRequest() {
   const [inUSD, setInUSD] = useState();
   const [ETHPrice, setETHPrice] = useState(0);
   const wallet = useWallet();
+
+  useEffect(() => {
+    checkUser(user);
+  }, []);
+
+  useEffect(() => {
+    checkUser(user);
+  }, [user]);
+
+  function checkUser(user) {
+    if (user === null) {
+      router.push("/auth/login");
+    }
+  }
+
   useAsync(async () => {
     try {
       const result = await getETHPrice();
@@ -194,4 +217,8 @@ export default function NewRequest() {
       </main>
     </div>
   );
-}
+};
+
+const firebaseAppAuth = firebaseApp.auth();
+
+export default withFirebaseAuth({ firebaseAppAuth })(NewRequest);

@@ -83,7 +83,7 @@ const NavBar = ({ user, signOut }) => {
                   zIndex: -1,
                 }}
               >
-                <NextLink href="/">🤝BetterFund</NextLink>
+                <NextLink href="/">BlockFund</NextLink>
               </Box>
             </Heading>
           </Flex>
@@ -92,7 +92,7 @@ const NavBar = ({ user, signOut }) => {
             justify={"flex-end"}
             direction={"row"}
             spacing={6}
-            display={{ base: "none", md: "flex" }}
+            display={{ base: "flex" }}
           >
             <Button
               fontSize={"md"}
@@ -130,7 +130,6 @@ const NavBar = ({ user, signOut }) => {
               ) : (
                 <div>
                   <Button
-                    display={{ base: "none", md: "inline-flex" }}
                     fontSize={"md"}
                     fontWeight={600}
                     color={"white"}
@@ -148,7 +147,6 @@ const NavBar = ({ user, signOut }) => {
             ) : (
               <div>
                 <Button
-                  display={{ base: "none", md: "inline-flex" }}
                   fontSize={"md"}
                   fontWeight={600}
                   color={"white"}
@@ -166,10 +164,6 @@ const NavBar = ({ user, signOut }) => {
 
             <DarkModeSwitch />
           </Stack>
-
-          <Flex display={{ base: "flex", md: "none" }}>
-            <DarkModeSwitch />
-          </Flex>
         </Container>
       </Flex>
     </Box>

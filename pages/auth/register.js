@@ -91,6 +91,22 @@ const Register = ({ user, createUserWithEmailAndPassword }) => {
           >
             <form onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing={4}>
+                <FormControl id="cnicNumber">
+                  <FormLabel>CNIC Number</FormLabel>
+                  <Input
+                    {...register("cnicNumber", { required: true })}
+                    isDisabled={isSubmitting}
+                    type="number"
+                  />
+                </FormControl>
+                <FormControl id="phoneNumber">
+                  <FormLabel>Phone Number</FormLabel>
+                  <Input
+                    {...register("phoneNumber", { required: true })}
+                    isDisabled={isSubmitting}
+                    type="number"
+                  />
+                </FormControl>
                 <FormControl id="emailAddress">
                   <FormLabel>Email Address</FormLabel>
                   <Input
@@ -114,7 +130,10 @@ const Register = ({ user, createUserWithEmailAndPassword }) => {
                     <AlertDescription mr={2}> {error}</AlertDescription>
                   </Alert>
                 ) : null}
-                {errors.name || errors.passWord ? (
+                {errors.cnicNumber ||
+                errors.phoneNumber ||
+                errors.name ||
+                errors.passWord ? (
                   <Alert status="error">
                     <AlertIcon />
                     <AlertDescription mr={2}>

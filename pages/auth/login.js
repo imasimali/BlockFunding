@@ -8,6 +8,7 @@ import {
   FormLabel,
   Input,
   Stack,
+  Divider,
   Button,
   Heading,
   Text,
@@ -17,7 +18,7 @@ import {
   AlertDescription,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { ArrowBackIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 
 import firebase from "firebase";
 import withFirebaseAuth from "react-with-firebase-auth";
@@ -136,6 +137,24 @@ const Login = ({ user, signInWithEmailAndPassword }) => {
                     Login User
                   </Button>
                 </Stack>
+                <Divider marginTop="4" marginBottom="4" />
+                <Text fontSize={"lg"} color={"teal.400"}>
+                  <ArrowForwardIcon mr={2} />
+                  <NextLink href="/auth/register">
+                    Don't have an account? No Problem!
+                  </NextLink>
+                </Text>
+                <Button
+                  bg={"teal.400"}
+                  color={"white"}
+                  href={"#"}
+                  _hover={{
+                    bg: "teal.500",
+                  }}
+                  onClick={() => router.push("/auth/register")}
+                >
+                  Create Account
+                </Button>
               </Stack>
             </form>
           </Box>

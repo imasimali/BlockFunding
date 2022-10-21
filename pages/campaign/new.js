@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { useAsync } from "react-use";
 import { useRouter } from "next/router";
@@ -30,7 +30,15 @@ import { getETHPrice, getETHPriceInUSD } from "../../lib/getETHPrice";
 import factory from "../../smart-contract/factory";
 import web3 from "../../smart-contract/web3";
 
-export default function NewCampaign() {
+import firebase from "firebase";
+import withFirebaseAuth from "react-with-firebase-auth";
+import firebaseConfig from "../../firebaseConfig";
+
+const firebaseApp = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
+
+const NewCampaign = ({ user }) => {
   const {
     handleSubmit,
     register,
@@ -44,6 +52,21 @@ export default function NewCampaign() {
   const [minContriInUSD, setMinContriInUSD] = useState();
   const [targetInUSD, setTargetInUSD] = useState();
   const [ETHPrice, setETHPrice] = useState(0);
+
+  useEffect(() => {
+    checkUser(user);
+  }, []);
+
+  useEffect(() => {
+    checkUser(user);
+  }, [user]);
+
+  function checkUser(user) {
+    if (user === null) {
+      router.push("/auth/login");
+    }
+  }
+
   useAsync(async () => {
     try {
       const result = await getETHPrice();
@@ -229,4 +252,8 @@ export default function NewCampaign() {
       </main>
     </div>
   );
-}
+};
+
+const firebaseAppAuth = firebaseApp.auth();
+
+export default withFirebaseAuth({ firebaseAppAuth })(NewCampaign);

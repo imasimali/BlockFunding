@@ -209,10 +209,10 @@ export default function CampaignSingle({
               </Text>
               <Link
                 color="teal.500"
-                href={`https://rinkeby.etherscan.io/address/${id}`}
+                href={`https://sepolia.etherscan.io/address/${id}`}
                 isExternal
               >
-                View on Rinkeby Etherscan <ExternalLinkIcon mx="2px" />
+                View on Sepolia Etherscan <ExternalLinkIcon mx="2px" />
               </Link>
               <Box mx={"auto"} w={"full"}>
                 <SimpleGrid columns={{ base: 1 }} spacing={{ base: 5 }}>
@@ -398,7 +398,7 @@ export default function CampaignSingle({
                         <Alert status="warning" mt={4}>
                           <AlertIcon />
                           <AlertDescription mr={2}>
-                            Please Connect Your Wallet to Contribute
+                            Please Login and Connect Your Wallet to Contribute
                           </AlertDescription>
                         </Alert>
                       )}

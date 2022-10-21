@@ -76,20 +76,15 @@ export default function Footer() {
               zIndex: -1,
             }}
           >
-            <NextLink href="/">🤝BetterFund</NextLink>
+            <NextLink href="/">🔗BlockFund</NextLink>
           </Box>
         </Heading>
         <Stack direction={"row"} spacing={6}>
           <NextLink href="/">Home</NextLink>
-          <Link
-            href={
-              "https://github.com/harsh242/betterfund-crowdfunding-in-blockchain"
-            }
-            isExternal
-          >
+          <Link href={"#"} isExternal>
             Github
           </Link>
-          <Link href={"mailto:harshbadhai242@gmail.com"} isExternal>
+          <Link href={"mailto:hi@asimali.net"} isExternal>
             Contact
           </Link>
         </Stack>
@@ -109,25 +104,21 @@ export default function Footer() {
           justify={{ base: "center", md: "space-between" }}
           align={{ base: "center", md: "center" }}
         >
-          <Text>🌐 Made while 💩 by Harsh, Hritvik , Nischal & Aaditya</Text>
+          <Text>
+            🌐 Made with ❤️ by Awais Akram, Muhammad Taha and Chaudhry Abubakar
+          </Text>
           <Stack direction={"row"} spacing={6}>
-            <SocialButton label={"Website"} href={"https://harshbadhai.me/"}>
+            <SocialButton label={"Website"} href={"https://asimali.net/"}>
               {" "}
               <FaGlobe />
             </SocialButton>
-            <SocialButton
-              label={"Twitter"}
-              href={"https://twitter.com/harshbadhai28"}
-            >
+            <SocialButton label={"Twitter"} href={"#"}>
               <FaTwitter />
             </SocialButton>
-            <SocialButton label={"Github"} href={"https://github.com/harsh242"}>
+            <SocialButton label={"Github"} href={"#"}>
               <FaGithub />
             </SocialButton>
-            <SocialButton
-              label={"Instagram"}
-              href={"https://www.instagram.com/frames_by._harsh/"}
-            >
+            <SocialButton label={"Instagram"} href={"#"}>
               <FaInstagram />
             </SocialButton>
           </Stack>
