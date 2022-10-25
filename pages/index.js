@@ -237,7 +237,7 @@ const Home = ({ campaigns, user }) => {
   return (
     <div>
       <Head>
-        <title>BetterFund</title>
+        <title>BlockFund</title>
         <meta
           name="description"
           content="Transparent Crowdfunding in Blockchain"
