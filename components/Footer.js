@@ -84,7 +84,7 @@ export default function Footer() {
           <Link href={"#"} isExternal>
             Github
           </Link>
-          <Link href={"mailto:hi@asimali.net"} isExternal>
+          <Link href={"#"} isExternal>
             Contact
           </Link>
         </Stack>
@@ -108,7 +108,7 @@ export default function Footer() {
             🌐 Made with ❤️ by Awais Akram, Muhammad Taha and Chaudhry Abubakar
           </Text>
           <Stack direction={"row"} spacing={6}>
-            <SocialButton label={"Website"} href={"https://asimali.net/"}>
+            <SocialButton label={"Website"} href={"#"}>
               {" "}
               <FaGlobe />
             </SocialButton>
