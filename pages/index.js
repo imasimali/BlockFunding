@@ -44,7 +44,7 @@ const firebaseApp = !firebase.apps.length
 export async function getServerSideProps(context) {
   const campaigns = await factory.methods.getDeployedCampaigns().call();
 
-  console.log(campaigns);
+  // console.log(campaigns);
 
   return {
     props: { campaigns },
@@ -210,7 +210,7 @@ const Home = ({ campaigns, user }) => {
   const [campaignList, setCampaignList] = useState([]);
   const [ethPrice, updateEthPrice] = useState(null);
 
-  console.log(user);
+  // console.log(user);
 
   async function getSummary() {
     try {

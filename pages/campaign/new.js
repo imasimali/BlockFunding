@@ -77,14 +77,14 @@ const NewCampaign = ({ user }) => {
     }
   }, []);
   async function onSubmit(data) {
-    console.log(
-      data.minimumContribution,
-      data.campaignName,
-      data.description,
-      data.category,
-      data.imageUrl,
-      data.target
-    );
+    // console.log(
+    //   data.minimumContribution,
+    //   data.campaignName,
+    //   data.description,
+    //   data.category,
+    //   data.imageUrl,
+    //   data.target
+    // );
     try {
       const accounts = await web3.eth.getAccounts();
       await factory.methods

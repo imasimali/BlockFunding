@@ -125,7 +125,7 @@ const RequestRow = ({
       <Td>
         <Link
           color="teal.500"
-          href={`https://sepolia.etherscan.io/address/${request.recipient}`}
+          href={`https://goerli.etherscan.io/address/${request.recipient}`}
           isExternal
         >
           {" "}

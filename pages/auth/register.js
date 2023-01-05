@@ -62,7 +62,7 @@ const Register = ({ user, createUserWithEmailAndPassword }) => {
   }
 
   async function onSubmit(data) {
-    console.log(data.emailAddress, data.passWord);
+    // console.log(data.emailAddress, data.passWord);
     createUserWithEmailAndPassword(data.emailAddress, data.passWord);
     checkUser(user);
   }

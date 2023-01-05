@@ -134,7 +134,7 @@ export default function CampaignSingle({
   const router = useRouter();
   const { width, height } = useWindowSize();
   async function onSubmit(data) {
-    console.log(data);
+    // console.log(data);
     try {
       const campaign = Campaign(id);
       const accounts = await web3.eth.getAccounts();
@@ -210,10 +210,10 @@ export default function CampaignSingle({
               </Text>
               <Link
                 color="teal.500"
-                href={`https://sepolia.etherscan.io/address/${id}`}
+                href={`https://goerli.etherscan.io/address/${id}`}
                 isExternal
               >
-                View on Sepolia Etherscan <ExternalLinkIcon mx="2px" />
+                View on Goerli Etherscan <ExternalLinkIcon mx="2px" />
               </Link>
               <Box mx={"auto"} w={"full"}>
                 <SimpleGrid columns={{ base: 1 }} spacing={{ base: 5 }}>

@@ -63,7 +63,7 @@ const Login = ({ user, signInWithEmailAndPassword }) => {
   }
 
   async function onSubmit(data) {
-    console.log(data.emailAddress, data.passWord);
+    // console.log(data.emailAddress, data.passWord);
     signInWithEmailAndPassword(data.emailAddress, data.passWord);
     checkUser(user);
   }
