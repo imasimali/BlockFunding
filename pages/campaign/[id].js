@@ -61,8 +61,9 @@ export async function getServerSideProps({ params }) {
       manager: summary[4],
       name: summary[5],
       description: summary[6],
-      image: summary[7],
-      target: summary[8],
+      category: summary[7],
+      image: summary[8],
+      target: summary[9],
       ETHPrice,
     },
   };

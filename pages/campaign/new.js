@@ -22,6 +22,7 @@ import {
   AlertDescription,
   FormHelperText,
   Textarea,
+  Select,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { ArrowBackIcon } from "@chakra-ui/icons";
@@ -80,6 +81,7 @@ const NewCampaign = ({ user }) => {
       data.minimumContribution,
       data.campaignName,
       data.description,
+      data.category,
       data.imageUrl,
       data.target
     );
@@ -90,6 +92,7 @@ const NewCampaign = ({ user }) => {
           web3.utils.toWei(data.minimumContribution, "ether"),
           data.campaignName,
           data.description,
+          data.category,
           data.imageUrl,
           web3.utils.toWei(data.target, "ether")
         )
@@ -162,6 +165,23 @@ const NewCampaign = ({ user }) => {
                     {...register("description", { required: true })}
                     isDisabled={isSubmitting}
                   />
+                </FormControl>
+                <FormControl id="category">
+                  <FormLabel>Campaign Category</FormLabel>
+                  <Select
+                    placeholder="Select option"
+                    {...register("category", { required: true })}
+                    isDisabled={isSubmitting}
+                  >
+                    <option value="arts">Arts</option>
+                    <option value="comics">Comics & Illustration</option>
+                    <option value="design">Design & Tech</option>
+                    <option value="film">Film</option>
+                    <option value="food">Food & Craft</option>
+                    <option value="games">Games</option>
+                    <option value="music">Music</option>
+                    <option value="publishing">Publishing</option>
+                  </Select>
                 </FormControl>
                 <FormControl id="imageUrl">
                   <FormLabel>Image URL</FormLabel>

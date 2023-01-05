@@ -3,8 +3,8 @@ pragma solidity ^0.4.17;
 contract CampaignFactory {
     address[] public deployedCampaigns;
 
-    function createCampaign(uint minimum,string name,string description,string image,uint target) public {
-        address newCampaign = new Campaign(minimum, msg.sender,name,description,image,target);
+    function createCampaign(uint minimum,string name,string description, string category,string image,uint target) public {
+        address newCampaign = new Campaign(minimum, msg.sender,name,description,category,image,target);
         deployedCampaigns.push(newCampaign);
     }
 
@@ -12,7 +12,6 @@ contract CampaignFactory {
         return deployedCampaigns;
     }
 }
-
 
 contract Campaign {
   struct Request {
@@ -29,6 +28,7 @@ contract Campaign {
   uint public minimunContribution;
   string public CampaignName;
   string public CampaignDescription;
+  string public CampaignCategory;
   string public imageUrl;
   uint public targetToAchieve;
   address[] public contributers;
@@ -41,11 +41,12 @@ contract Campaign {
       _;
   }
 
-  function Campaign(uint minimun, address creator,string name,string description,string image,uint target) public {
+  function Campaign(uint minimun, address creator,string name,string description,string category,string image,uint target) public {
       manager = creator;
       minimunContribution = minimun;
       CampaignName=name;
       CampaignDescription=description;
+      CampaignCategory=category;
       imageUrl=image;
       targetToAchieve=target;
   }
@@ -88,7 +89,7 @@ contract Campaign {
   }
 
 
-    function getSummary() public view returns (uint,uint,uint,uint,address,string,string,string,uint) {
+    function getSummary() public view returns (uint,uint,uint,uint,address,string,string,string,string,uint) {
         return(
             minimunContribution,
             this.balance,
@@ -97,6 +98,7 @@ contract Campaign {
             manager,
             CampaignName,
             CampaignDescription,
+            CampaignCategory,
             imageUrl,
             targetToAchieve
           );
