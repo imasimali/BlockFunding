@@ -227,7 +227,6 @@ const SearchParams = ({ categories, campaignList, setFilteredCampaigns }) => {
       );
     }
   };
-
   const handleSearchTermSubmit = () => {
     setSearchTerm(searchTerm);
     setFilteredCampaigns(
@@ -236,7 +235,6 @@ const SearchParams = ({ categories, campaignList, setFilteredCampaigns }) => {
       )
     );
   };
-
   const handleSearchTermChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -358,7 +356,7 @@ const Home = ({ campaigns, user }) => {
           </NextLink>
         </Container>
         <Container py={{ base: "4", md: "12" }} maxW={"7xl"}>
-          <HStack spacing={2}>
+          <HStack spacing={2} mb={6}>
             <SkeletonCircle size="4" />
             <Heading as="h2" size="lg">
               Open Campaigns
