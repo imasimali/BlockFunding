@@ -24,6 +24,9 @@ import {
   HStack,
   Stack,
   Progress,
+  Input,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 
 import factory from "../smart-contract/factory";
@@ -33,11 +36,21 @@ import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { FaHandshake } from "react-icons/fa";
 import { FcShare, FcDonate, FcMoneyTransfer } from "react-icons/fc";
 
+const categoriesList = {
+  All: "all",
+  Arts: "arts",
+  "Comics & Illustration": "comics",
+  "Design & Tech": "design",
+  Film: "film",
+  "Food & Craft": "food",
+  Games: "games",
+  Music: "music",
+  Publishing: "publishing",
+};
+
 export async function getServerSideProps(context) {
   const campaigns = await factory.methods.getDeployedCampaigns().call();
-
   // console.log(campaigns);
-
   return {
     props: { campaigns },
   };
@@ -198,11 +211,89 @@ function CampaignCard({
   );
 }
 
+const SearchParams = ({ categories, campaignList, setFilteredCampaigns }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    if (category === "All") {
+      setFilteredCampaigns(campaignList);
+    } else {
+      setFilteredCampaigns(
+        campaignList.filter((campaign) =>
+          campaign[7].includes(categoriesList[category])
+        )
+      );
+    }
+  };
+
+  const handleSearchTermSubmit = () => {
+    setSearchTerm(searchTerm);
+    setFilteredCampaigns(
+      campaignList.filter((campaign) =>
+        campaign[5].toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+  };
+
+  const handleSearchTermChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  return (
+    <Flex
+      flexDir={{ base: "column", md: "row" }}
+      justifyContent="space-between"
+      alignItems="center"
+      py={4}
+      bg={useColorModeValue("white", "gray.800")}
+      borderBottomWidth="1px"
+      borderBottomColor={useColorModeValue("gray.200", "gray.700")}
+    >
+      <Flex justifyContent="center" mb={{ base: 3, md: 0 }}>
+        <InputGroup size="md" width={350}>
+          <Input
+            pr="4.5rem"
+            type="text"
+            placeholder="Search Campaigns"
+            aria-label="Search Campaigns"
+            value={searchTerm}
+            onChange={handleSearchTermChange}
+          />
+          <InputRightElement width="4.5rem">
+            <Button
+              size="md"
+              colorScheme="teal"
+              onClick={handleSearchTermSubmit}
+            >
+              Search
+            </Button>
+          </InputRightElement>
+        </InputGroup>
+      </Flex>
+      <Flex wrap="wrap" justifyContent="center">
+        {categories.map((category, i) => (
+          <Button
+            key={i}
+            colorScheme={selectedCategory === category ? "teal" : "gray"}
+            variant="solid"
+            onClick={() => handleCategoryClick(category)}
+            size="sm"
+            m={1}
+          >
+            {category}
+          </Button>
+        ))}
+      </Flex>
+    </Flex>
+  );
+};
+
 const Home = ({ campaigns, user }) => {
   const [campaignList, setCampaignList] = useState([]);
   const [ethPrice, updateEthPrice] = useState(null);
-
-  console.log(user);
+  const [filteredCampaigns, setFilteredCampaigns] = useState([]);
 
   async function getSummary() {
     try {
@@ -226,6 +317,10 @@ const Home = ({ campaigns, user }) => {
     getSummary();
   }, []);
 
+  useEffect(() => {
+    setFilteredCampaigns(campaignList);
+  }, [campaignList]);
+
   return (
     <div>
       <Head>
@@ -238,7 +333,6 @@ const Home = ({ campaigns, user }) => {
       </Head>
       <main className={styles.main}>
         <Container py={{ base: "4", md: "12" }} maxW={"7xl"} align={"left"}>
-          {" "}
           <Heading
             textAlign={useBreakpointValue({ base: "left" })}
             fontFamily={"heading"}
@@ -271,11 +365,15 @@ const Home = ({ campaigns, user }) => {
             </Heading>
           </HStack>
 
-          <Divider marginTop="4" />
+          <SearchParams
+            categories={Object.keys(categoriesList)}
+            setFilteredCampaigns={setFilteredCampaigns}
+            campaignList={campaignList}
+          />
 
           {campaignList.length > 0 ? (
             <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} py={8}>
-              {campaignList.map((el, i) => {
+              {filteredCampaigns.map((el, i) => {
                 return (
                   <div key={i}>
                     <CampaignCard
