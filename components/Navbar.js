@@ -21,14 +21,6 @@ import { useRouter } from "next/router";
 import DarkModeSwitch from "./DarkModeSwitch";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
-import firebase from "firebase";
-import withFirebaseAuth from "react-with-firebase-auth";
-import firebaseConfig from "../firebaseConfig";
-
-const firebaseApp = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
-
 const NavBar = ({ user, signOut }) => {
   const wallet = useWallet();
   const router = useRouter();
@@ -170,6 +162,4 @@ const NavBar = ({ user, signOut }) => {
   );
 };
 
-const firebaseAppAuth = firebaseApp.auth();
-
-export default withFirebaseAuth({ firebaseAppAuth })(NavBar);
+export default NavBar;

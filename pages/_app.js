@@ -12,10 +12,36 @@ const theme = extendTheme({
   },
 });
 
-function MyApp({ Component, pageProps }) {
+import firebase from "firebase/app";
+import "firebase/auth";
+import withFirebaseAuth from "react-with-firebase-auth";
+import firebaseConfig from "../firebaseConfig";
+
+const firebaseApp = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
+
+function MyApp({
+  Component,
+  pageProps,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  user,
+  error,
+  loading,
+}) {
+  const authData = {
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signOut,
+    user,
+    error,
+    loading,
+  };
+
   return (
     <>
-      {" "}
       <ChakraProvider theme={theme}>
         <UseWalletProvider
           chainId={4}
@@ -26,13 +52,15 @@ function MyApp({ Component, pageProps }) {
             },
           }}
         >
-          <NavBar />
-          <Component {...pageProps} />
-          <Footer />{" "}
+          <NavBar {...authData} />
+          <Component {...pageProps} {...authData} />
+          <Footer />
         </UseWalletProvider>
       </ChakraProvider>
     </>
   );
 }
 
-export default MyApp;
+const firebaseAppAuth = firebaseApp.auth();
+
+export default withFirebaseAuth({ firebaseAppAuth })(MyApp);

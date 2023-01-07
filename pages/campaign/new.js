@@ -31,14 +31,6 @@ import { getETHPrice, getETHPriceInUSD } from "../../lib/getETHPrice";
 import factory from "../../smart-contract/factory";
 import web3 from "../../smart-contract/web3";
 
-import firebase from "firebase";
-import withFirebaseAuth from "react-with-firebase-auth";
-import firebaseConfig from "../../firebaseConfig";
-
-const firebaseApp = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
-
 const NewCampaign = ({ user }) => {
   const {
     handleSubmit,
@@ -274,6 +266,4 @@ const NewCampaign = ({ user }) => {
   );
 };
 
-const firebaseAppAuth = firebaseApp.auth();
-
-export default withFirebaseAuth({ firebaseAppAuth })(NewCampaign);
+export default NewCampaign;

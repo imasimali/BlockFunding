@@ -29,14 +29,6 @@ import web3 from "../../../../smart-contract/web3";
 import Campaign from "../../../../smart-contract/campaign";
 import { useAsync } from "react-use";
 
-import firebase from "firebase";
-import withFirebaseAuth from "react-with-firebase-auth";
-import firebaseConfig from "../../../../firebaseConfig";
-
-const firebaseApp = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
-
 const NewRequest = ({ user }) => {
   const router = useRouter();
   const { id } = router.query;
@@ -219,6 +211,4 @@ const NewRequest = ({ user }) => {
   );
 };
 
-const firebaseAppAuth = firebaseApp.auth();
-
-export default withFirebaseAuth({ firebaseAppAuth })(NewRequest);
+export default NewRequest;

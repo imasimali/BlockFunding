@@ -20,14 +20,6 @@ import {
 import NextLink from "next/link";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 
-import firebase from "firebase";
-import withFirebaseAuth from "react-with-firebase-auth";
-import firebaseConfig from "../../firebaseConfig";
-
-const firebaseApp = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
-
 const Login = ({ user, signInWithEmailAndPassword }) => {
   const {
     handleSubmit,
@@ -38,15 +30,6 @@ const Login = ({ user, signInWithEmailAndPassword }) => {
   });
   const router = useRouter();
   const [error, setError] = useState("");
-
-  // useAsync(async () => {
-  //   try {
-  //     const result = await getETHPrice();
-  //     setETHPrice(result);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, []);
 
   useEffect(() => {
     checkUser(user);
@@ -164,6 +147,4 @@ const Login = ({ user, signInWithEmailAndPassword }) => {
   );
 };
 
-const firebaseAppAuth = firebaseApp.auth();
-
-export default withFirebaseAuth({ firebaseAppAuth })(Login);
+export default Login;
