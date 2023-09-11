@@ -75,7 +75,7 @@ const NavBar = ({ user, signOut }) => {
                   zIndex: -1,
                 }}
               >
-                <NextLink href="/">BlockFund</NextLink>
+                <NextLink href="/">BlockFunding</NextLink>
               </Box>
             </Heading>
           </Flex>
@@ -121,19 +121,32 @@ const NavBar = ({ user, signOut }) => {
                 </Menu>
               ) : (
                 <div>
-                  <Button
-                    fontSize={"md"}
-                    fontWeight={600}
-                    color={"white"}
-                    bg={"teal.400"}
-                    href={"#"}
-                    _hover={{
-                      bg: "teal.300",
-                    }}
-                    onClick={() => wallet.connect()}
-                  >
-                    Connect Wallet{" "}
-                  </Button>
+                  <Menu>
+                    <MenuButton
+                      as={Button}
+                      fontSize={"md"}
+                      fontWeight={600}
+                      color={"white"}
+                      bg={"teal.400"}
+                      href={"#"}
+                      _hover={{
+                        bg: "teal.300",
+                      }}
+                      rightIcon={<ChevronDownIcon />}
+                    >
+                      Connect Wallet
+                    </MenuButton>
+                    <MenuList>
+                      <MenuItem onClick={() => wallet.connect()}>
+                        {" "}
+                        Connect Wallet{" "}
+                      </MenuItem>
+                      <MenuItem onClick={() => signOut()}>
+                        {" "}
+                        Logout Account{" "}
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
                 </div>
               )
             ) : (

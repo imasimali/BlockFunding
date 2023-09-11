@@ -46,7 +46,14 @@ const Register = ({ user, createUserWithEmailAndPassword }) => {
 
   async function onSubmit(data) {
     // console.log(data.emailAddress, data.passWord);
-    createUserWithEmailAndPassword(data.emailAddress, data.passWord);
+    setError("");
+    const registerUser = await createUserWithEmailAndPassword(
+      data.emailAddress,
+      data.passWord
+    );
+    if (registerUser.code) {
+      setError(registerUser.message);
+    }
     checkUser(user);
   }
 

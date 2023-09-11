@@ -1,6 +1,6 @@
 BlockFunding : Crowdfunding Platform Powered by Ethereum Blockchain
 
-The Platform is live on Goerli Test Network and available to use at : [blockfunding.site](https://blockfunding.site/)
+The Platform is live on Goerli Test Network and available to use at : [blockfunding.vercel.app](https://blockfunding.vercel.app/)
 
 ## Problem Statement and Necessity
 

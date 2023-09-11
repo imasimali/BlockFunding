@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "legacy-provider": "export SET NODE_OPTIONS=--openssl-legacy-provider"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.12",

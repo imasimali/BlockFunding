@@ -47,7 +47,14 @@ const Login = ({ user, signInWithEmailAndPassword }) => {
 
   async function onSubmit(data) {
     // console.log(data.emailAddress, data.passWord);
-    signInWithEmailAndPassword(data.emailAddress, data.passWord);
+    setError("");
+    const loginUser = await signInWithEmailAndPassword(
+      data.emailAddress,
+      data.passWord
+    );
+    if (loginUser.code) {
+      setError(loginUser.message);
+    }
     checkUser(user);
   }
 

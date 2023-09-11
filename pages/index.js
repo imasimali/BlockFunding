@@ -322,7 +322,7 @@ const Home = ({ campaigns, user }) => {
   return (
     <div>
       <Head>
-        <title>BlockFund</title>
+        <title>BlockFunding</title>
         <meta
           name="description"
           content="Transparent Crowdfunding in Blockchain"
@@ -400,7 +400,7 @@ const Home = ({ campaigns, user }) => {
           <HStack spacing={2}>
             <SkeletonCircle size="4" />
             <Heading as="h2" size="lg">
-              How BetterFund Works
+              How BlockFunding Works
             </Heading>
           </HStack>
           <Divider marginTop="4" />

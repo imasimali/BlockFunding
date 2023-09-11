@@ -76,15 +76,15 @@ export default function Footer() {
               zIndex: -1,
             }}
           >
-            <NextLink href="/">🔗BlockFund</NextLink>
+            <NextLink href="/">BlockFunding</NextLink>
           </Box>
         </Heading>
         <Stack direction={"row"} spacing={6}>
           <NextLink href="/">Home</NextLink>
-          <Link href={"#"} isExternal>
+          <Link href={"https://github.com/imasimali/BlockFunding"} isExternal>
             Github
           </Link>
-          <Link href={"#"} isExternal>
+          <Link href={"http://asimali.net"} isExternal>
             Contact
           </Link>
         </Stack>
@@ -104,18 +104,18 @@ export default function Footer() {
           justify={{ base: "center", md: "space-between" }}
           align={{ base: "center", md: "center" }}
         >
-          <Text>
-            🌐 Made with ❤️ by Awais Akram, Muhammad Taha and Chaudhry Abubakar
-          </Text>
+          <Text>🌐 Made with ❤️ by Asim Ali. All rights reserved</Text>
           <Stack direction={"row"} spacing={6}>
-            <SocialButton label={"Website"} href={"#"}>
-              {" "}
+            <SocialButton label={"Website"} href={"http://asimali.net"}>
               <FaGlobe />
             </SocialButton>
             <SocialButton label={"Twitter"} href={"#"}>
               <FaTwitter />
             </SocialButton>
-            <SocialButton label={"Github"} href={"#"}>
+            <SocialButton
+              label={"Github"}
+              href={"https://github.com/imasimali/BlockFunding"}
+            >
               <FaGithub />
             </SocialButton>
             <SocialButton label={"Instagram"} href={"#"}>
